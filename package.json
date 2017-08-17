@@ -1,0 +1,25 @@
+{
+  "name": "bcleech",
+  "version": "1.0.0",
+  "description": "Bandcamp Leech. Data from my favorite bands into a database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkullMasher/bcleech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SkullMasher/bcleech/issues"
+  },
+  "homepage": "https://github.com/SkullMasher/bcleech#readme",
+  "dependencies": {
+    "nightmare": "^2.10.0",
+    "nodemon": "^1.11.0"
+  }
+}
