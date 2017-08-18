@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/SkullMasher/bcleech#readme",
   "dependencies": {
+    "mysql2": "^1.4.1",
     "nightmare": "^2.10.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "sequelize": "^4.5.0"
   }
 }

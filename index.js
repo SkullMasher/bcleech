@@ -1,32 +1,61 @@
 let Nightmare = require('nightmare')
+let Sequelize = require('sequelize')
 let nightmare = Nightmare({ show: true })
 
-const testURL = 'https://davidmaximmicic.bandcamp.com'
-let albumName = ''
-let albumLink = ''
-let bandName = ''
-let bandLink = ''
-let albumTag = ''
-// Some ids and class on the site
-const searchField = 'search-field'
+const sequelize = new Sequelize('random_pantheon', 'skullmasher', '', {
+  host: 'localhost',
+  dialect: 'mysql',
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  },
+  define: {
+    timestamps: false
+  }
+})
 
-nightmare
-  .goto(testURL)
-  .wait('#name-section')
-  .evaluate(() => {
-    albumName = document.querySelector('#name-section .trackTitle').innerText
-    bandName = document.querySelector('#name-section a').innerText
-    bandLink = document.querySelector('#name-section a').href
-    albumTag = document.querySelector('.tralbum-tags').innerText
-    return [albumName, bandName, bandLink, albumTag]
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.')
   })
-  .end()
-  .then((result) => {
-    console.log(result)
+  .catch(err => {
+    console.error('Unable to connect to the database:', err)
   })
-  .catch((error) => {
-    console.error('Search failed:', error)
-  })
+
+const Band = sequelize.define('bands', {
+  name: {
+    type: Sequelize.STRING
+  },
+  link: {
+    type: Sequelize.STRING
+  },
+  order: {
+    type: Sequelize.INTEGER
+  }
+})
+
+Band.findOne({where: {'name': 'David Maxim Micic'}}).then((res) => {
+  console.log(res.name)
+})
+// nightmare
+//   .goto(testURL)
+//   .wait('#name-section')
+//   .evaluate(() => {
+//     albumName = document.querySelector('#name-section .trackTitle').innerText
+//     bandName = document.querySelector('#name-section a').innerText
+//     bandLink = document.querySelector('#name-section a').href
+//     albumTag = document.querySelector('.tralbum-tags').innerText
+//     return [albumName, bandName, bandLink, albumTag]
+//   })
+//   .end()
+//   .then((result) => {
+//     console.log(result)
+//   })
+//   .catch((error) => {
+//     console.error('Search failed:', error)
+//   })
 
 // nightmare
 //   .goto(testURL)
