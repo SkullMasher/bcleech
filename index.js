@@ -36,9 +36,26 @@ const Band = sequelize.define('bands', {
   }
 })
 
-Band.findOne({where: {'name': 'David Maxim Micic'}}).then((res) => {
+const Tag = sequelize.define('tags', {
+  name: {
+    type: Sequelize.STRING
+  }
+})
+
+Tag.findById(1).then((res) => {
   console.log(res.name)
 })
+
+Tag.findAll().then((tags) => {
+  tags.forEach((tag) => {
+    console.log(tag.name)
+  })
+})
+
+// Band.findOne({where: {'name': 'David Maxim Micic'}}).then((res) => {
+//   console.log(res.name)
+// })
+//
 // nightmare
 //   .goto(testURL)
 //   .wait('#name-section')
